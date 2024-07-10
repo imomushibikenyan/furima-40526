@@ -2,14 +2,14 @@
 
 | Column        | Type    | Options                   |
 | ------------- | ------- | ------------------------- |
-| id (PK)       | integer | NOT NULL, PRIMARY KEY     |
-| name          | string  | NOT NULL                  |
-| email         | string  | NOT NULL, UNIQUE          |
-| password_digest | string | NOT NULL                  |
-| address       | string  |                           |
-| phone_number  | string  |                           |
-| created_at    | datetime| NOT NULL                  |
-| updated_at    | datetime| NOT NULL                  |
+| nickname      | string  | null: false               |
+| last_name     | string  | null: false               |
+| first_name    | string  | null: false               |
+| last_name_kana  | string  | null: false               |
+| first_name_kana | string  | null: false               |
+| email         | string  | null: false, unique: true        |
+| encrypted_password | string | null: false               |
+| birth_date         | date    | null: false               |
 
 #### アソシエーション
 
@@ -21,18 +21,15 @@
 
 | Column            | Type    | Options                   |
 | ----------------- | ------- | ------------------------- |
-| id (PK)           | integer | NOT NULL, PRIMARY KEY     |
-| name              | string  | NOT NULL                  |
-| description       | text    | NOT NULL                  |
-| price             | integer | NOT NULL                  |
-| seller_id (FK)    | integer | NOT NULL, FOREIGN KEY     |
-| category_id (FK)  | integer |                           |
-| condition_id (FK) | integer |                           |
-| shipping_id (FK)  | integer |                           |
-| region_id (FK)    | integer |                           |
-| shipping_days_id (FK) | integer |                       |
-| created_at        | datetime| NOT NULL                  |
-| updated_at        | datetime| NOT NULL                  |
+| name              | string  | null: false                  |
+| description       | text    | null: false                  |
+| price             | integer | null: false                  |
+| user              | references | null: false, foreign_key: true|
+| category_id       | integer | null: false               |
+| condition_id      | integer | null: false               |
+| shipping_id       | integer | null: false               |
+| region_id         | integer | null: false               |
+| shipping_days_id  | integer | null: false           |
 
 #### アソシエーション
 
@@ -46,11 +43,9 @@
 
 | Column          | Type    | Options                   |
 | --------------- | ------- | ------------------------- |
-| id (PK)         | integer | NOT NULL, PRIMARY KEY     |
-| product_id (FK) | integer | NOT NULL, FOREIGN KEY     |
-| buyer_id (FK)   | integer | NOT NULL, FOREIGN KEY     |
-| purchased_at    | datetime| NOT NULL                  |
-| payment_method  | string  |                           |
+| product_id      | integer | null: false, foreign_key: true    |
+| user            | references | null: false, foreign_key: true     |
+
 
 #### アソシエーション
 
@@ -64,14 +59,13 @@
 
 | Column             | Type    | Options                   |
 | ------------------ | ------- | ------------------------- |
-| id (PK)            | integer | NOT NULL, PRIMARY KEY     |
-| purchase_id (FK)   | integer | NOT NULL, FOREIGN KEY     |
-| postal_code        | string  |                           |
-| address            | string  |                           |
-| recipient_name     | string  |                           |
-| recipient_phone    | string  |                           |
-| created_at         | datetime| NOT NULL                  |
-| updated_at         | datetime| NOT NULL                  |
+| purchase           | integer | null: false, foreign_key: true     |
+| postal_code        | string  | null: false               |
+| recipient_phone    | string  | null: false               |
+| prefecture         | string  | null: false                |  
+| city               | string  | null: false                |  
+| street_address     | string  | null: false                |  
+| building_name      | string  |                            |  
 
 #### アソシエーション
 
