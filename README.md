@@ -36,7 +36,7 @@
 - 多対1の関係:
   - belongs_to :user, foreign_key: 'seller_id'
 - 1対1の関係:
-  - has_one :purchases
+  - has_one :purchase
 
 ### purchases テーブル
 
@@ -50,9 +50,9 @@
 
 - 多対1の関係:
   - belongs_to :user, foreign_key: 'buyer_id'
+  - belongs_to :product
 - 1対1の関係:
   - has_one :shipping_address
-  - has_one :product
 
 ### shipping_addresses テーブル
 
