@@ -29,40 +29,39 @@
 | condition_id      | integer | null: false               |
 | shipping_id       | integer | null: false               |
 | region_id         | integer | null: false               |
-| shipping_days_id  | integer | null: false           |
+| shipping_day_id   | integer | null: false           |
 
 #### アソシエーション
 
 - 多対1の関係:
   - belongs_to :user, foreign_key: 'seller_id'
-- 1対多の関係:
-  - has_many :purchases
-  - has_many :shipping_addresses, through: :purchases
+- 1対1の関係:
+  - has_one :purchases
 
 ### purchases テーブル
 
 | Column          | Type    | Options                   |
 | --------------- | ------- | ------------------------- |
-| product_id      | integer | null: false, foreign_key: true    |
+| product         | references | null: false, foreign_key: true    |
 | user            | references | null: false, foreign_key: true     |
 
 
 #### アソシエーション
 
 - 多対1の関係:
-  - belongs_to :product
   - belongs_to :user, foreign_key: 'buyer_id'
 - 1対1の関係:
   - has_one :shipping_address
+  - has_one :product
 
 ### shipping_addresses テーブル
 
 | Column             | Type    | Options                   |
 | ------------------ | ------- | ------------------------- |
-| purchase           | integer | null: false, foreign_key: true     |
+| purchase           | references | null: false, foreign_key: true     |
 | postal_code        | string  | null: false               |
 | recipient_phone    | string  | null: false               |
-| prefecture         | string  | null: false                |  
+| region_id          | integer | null: false                |  
 | city               | string  | null: false                |  
 | street_address     | string  | null: false                |  
 | building_name      | string  |                            |  
