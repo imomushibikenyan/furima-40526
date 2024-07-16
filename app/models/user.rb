@@ -13,4 +13,13 @@ class User < ApplicationRecord
   validates :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: '全角カタカナを使用してください' }
   validates :birth_date, presence: true
 
+  validate :password_complexity
+
+  private
+
+  def password_complexity
+    if password.present? && !password.match?(/\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]+\z/)
+      errors.add :password, 'は半角英字と数字の両方を含む必要があります'
+    end
+  end
 end
