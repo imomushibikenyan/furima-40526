@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
-  belongs_to_active_hash :category
-  belongs_to_active_hash :condition
-  belongs_to_active_hash :shipping
-  belongs_to_active_hash :region
-  belongs_to_active_hash :shipping_day
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :shipping
+  belongs_to :region
+  belongs_to :shipping_day
   has_one_attached :image
 
   validates :name, presence: { message: "を入力してください" }
