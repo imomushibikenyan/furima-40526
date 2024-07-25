@@ -32,16 +32,22 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price を入力してください")
       end
 
+      it '価格が半角数値でない場合は登録できない' do
+        @item.price = '１２３'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は半角数字で¥300〜¥9,999,999の間で入力してください")
+      end
+
       it '価格が¥300未満では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は¥300〜¥9,999,999の間で入力してください")
+        expect(@item.errors.full_messages).to include("Price は半角数字で¥300〜¥9,999,999の間で入力してください")
       end
 
       it '価格が¥9,999,999を超えると登録できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は¥300〜¥9,999,999の間で入力してください")
+        expect(@item.errors.full_messages).to include("Price は半角数字で¥300〜¥9,999,999の間で入力してください")
       end
 
       it '画像が添付されていない場合は登録できない' do
