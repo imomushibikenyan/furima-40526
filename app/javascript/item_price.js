@@ -21,5 +21,5 @@ function setupPriceCalculation() {
 }
 
 document.addEventListener('DOMContentLoaded', setupPriceCalculation);
-document.addEventListener('turbo:frame-load', setupPriceCalculation);
+document.addEventListener('turbo:load', setupPriceCalculation);
 document.addEventListener('turbo:render', setupPriceCalculation);
