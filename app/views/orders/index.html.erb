@@ -5,7 +5,9 @@
     <h1 class='transaction-title-text'>
       購入内容の確認
     </h1>
-    <%# 購入内容の表示 %>
+
+    <%= render 'shared/error_messages', model: @order_form %>
+
     <div class='buy-item-info'>
       <%= image_tag url_for(@item.image), class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
