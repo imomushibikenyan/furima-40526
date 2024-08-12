@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :redirect_if_invalid, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -39,5 +40,11 @@ class OrdersController < ApplicationController
         card: @order_form.token,
         currency: 'jpy'
       )
+  end
+
+  def redirect_if_invalid
+    if @item.user_id == current_user.id || @item.purchase.present?
+      redirect_to root_path, alert: "この商品は購入できません"
+    end
   end
 end
