@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_115236) do
   end
 
   create_table "purchases", charset: "utf8", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
+    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_purchases_on_item_id"
