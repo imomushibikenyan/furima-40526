@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   validate :password_complexity
 
+  # アソシエーション
+  has_many :items, foreign_key: 'seller_id'
+  has_many :purchases, foreign_key: 'buyer_id'
+
   private
 
   def password_complexity

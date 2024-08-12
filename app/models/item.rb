@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
   has_one_attached :image
 
+  has_one :purchase
+
   validates :name, presence: { message: "を入力してください" }
   validates :description, presence: { message: "を入力してください" }
   validates :price, presence: { message: "を入力してください" }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "は半角数字で¥300〜¥9,999,999の間で入力してください" }
